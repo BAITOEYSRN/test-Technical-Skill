@@ -1,0 +1,1 @@
+##run migration --migrate -path migrations -database "postgres://user:password@localhost:5432/mydb?sslmode=disable" up
