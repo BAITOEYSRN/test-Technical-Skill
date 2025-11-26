@@ -13,20 +13,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// type DBConfig struct {
-// 	User                  string `split_words:"true" required:"true"`
-// 	Password              string `split_words:"true" required:"true"`
-// 	Name                  string `split_words:"true" required:"true"`
-// 	Host                  string `split_words:"true" required:"true"`
-// 	Port                  int    `split_words:"true" required:"true"`
-// 	SSLMode               string `split_words:"true"`
-// 	MaxIdleCons           int    `split_words:"true"`
-// 	MaxOpenCons           int    `split_words:"true"`
-// 	MaxLifeTimeConsMinute int    `split_words:"true"`
-// 	SchemaName            string `split_words:"true"`
-// 	LogLevel              bool   `split_words:"true"`
-// }
-
 type MigrationConfig struct {
 	Path string
 }
