@@ -23,7 +23,7 @@ func NewGetListProfileUserHandler(usecase domain.UserUsecase) *getListProfileUse
 func (u *getListProfileUserHandler) GetListProfileUserHandler(ctx *gin.Context) {
 	getlistUser, err := u.userUsecase.GetListUsers(ctx)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		response.ResponseErrorJsonWithCode(ctx, err)
 		return
 	}
 	response.ResponseJsonWithCode(ctx, http.StatusOK, uuid.New(), "success", "Get list profile user success", dto.ToResponseListUser(getlistUser))

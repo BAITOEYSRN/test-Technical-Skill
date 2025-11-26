@@ -27,7 +27,12 @@ func (r *userRepository) CreateUser(ctx context.Context, user models.User) (*mod
 
 		return nil
 	}); err != nil {
-		return nil, err
+		return nil, response.Wrap(
+			err,
+			http.StatusInternalServerError,
+			uuid.New(),
+			"failed to create user",
+		)
 	}
 
 	return &user, nil

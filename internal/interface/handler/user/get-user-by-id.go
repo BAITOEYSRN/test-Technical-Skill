@@ -23,13 +23,13 @@ func NewGetUserByIDHandler(usecase domain.UserUsecase) *getUserByIDHandler {
 func (u *getUserByIDHandler) GetUserByIDHandler(ctx *gin.Context) {
 	id, err := dto.GetUserIDFromParam(ctx)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		response.ResponseErrorJsonWithCode(ctx, err)
 		return
 	}
 
 	user, err := u.userUsecase.GetUserByID(ctx, id)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		response.ResponseErrorJsonWithCode(ctx, err)
 		return
 	}
 	response.ResponseJsonWithCode(ctx, http.StatusOK, uuid.New(), "success", "Get user by id success", dto.ToResponseGetUserByID(user))

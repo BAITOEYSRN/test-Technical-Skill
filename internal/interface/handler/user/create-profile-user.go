@@ -24,7 +24,7 @@ func NewCreateProfileUserHandler(usecase domain.UserUsecase) *createProfileUserH
 func (u *createProfileUserHandlerCfg) CreateProfileUserHandler(ctx *gin.Context) {
 	req, err := new(dto.CreateProfileUserRequest).Validate(ctx)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		response.ResponseErrorJsonWithCode(ctx, err)
 		return
 	}
 
@@ -36,7 +36,7 @@ func (u *createProfileUserHandlerCfg) CreateProfileUserHandler(ctx *gin.Context)
 		Address:     req.Address,
 	})
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		response.ResponseErrorJsonWithCode(ctx, err)
 		return
 	}
 
