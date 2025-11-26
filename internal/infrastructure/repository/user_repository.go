@@ -28,7 +28,7 @@ func (r *userRepository) CreateUser(ctx context.Context, user models.User) (*mod
 		return nil
 	}); err != nil {
 		return nil, response.Wrap(
-			err,
+			errors.New("error"),
 			http.StatusInternalServerError,
 			uuid.New(),
 			"failed to create user",
@@ -54,7 +54,7 @@ func (r *userRepository) GetUserByID(ctx context.Context, id uuid.UUID) (*models
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, response.Wrap(
-				err,
+				errors.New("error"),
 				http.StatusNotFound,
 				uuid.New(),
 				"user not found",
@@ -62,10 +62,10 @@ func (r *userRepository) GetUserByID(ctx context.Context, id uuid.UUID) (*models
 		}
 
 		return nil, response.Wrap(
-			err,
+			errors.New("not found user by id"),
 			http.StatusInternalServerError,
 			uuid.New(),
-			"failed to get user by id",
+			"not found user by id",
 		)
 	}
 	return &user, nil

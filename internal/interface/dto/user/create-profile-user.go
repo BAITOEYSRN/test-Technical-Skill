@@ -3,7 +3,6 @@ package dto
 import (
 	"errors"
 
-	"github.com/BAITOEYSRN/test-Technical-Skill/internal/domain/entity"
 	"github.com/BAITOEYSRN/test-Technical-Skill/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -33,8 +32,8 @@ func (r *CreateProfileUserRequest) Validate(ctx *gin.Context) (*CreateProfileUse
 	return req, nil
 }
 
-func ToCreateProfileUserResponse(user *entity.User) *CreateProfileUserResponse {
+func ToCreateProfileUserResponse(id *uuid.UUID) *CreateProfileUserResponse {
 	return &CreateProfileUserResponse{
-		ID: user.ID,
+		ID: *id,
 	}
 }
