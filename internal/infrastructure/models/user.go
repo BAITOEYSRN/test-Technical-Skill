@@ -14,7 +14,7 @@ type User struct {
 	Age         int        `gorm:"not null"`
 	Address     string     `gorm:"not null"`
 	CreatedAt   time.Time  `gorm:"not null;default:now()"`
-	UpdatedAt   *time.Time `gorm:"default:now()"`
+	UpdatedAt   *time.Time `gorm:"default:null"`
 }
 
 func (u *User) TableName() string {

@@ -9,6 +9,6 @@ import (
 
 type UserUsecase interface {
 	GetListUsers(ctx context.Context) ([]entity.User, error)
-	CreateUser(ctx context.Context, user entity.User) (*entity.User, error)
+	CreateUser(ctx context.Context, user entity.User) (*uuid.UUID, error)
 	GetUserByID(ctx context.Context, id uuid.UUID) (*entity.User, error)
 }
