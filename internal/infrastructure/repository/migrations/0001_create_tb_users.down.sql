@@ -1,1 +1,0 @@
-DROP TABLE dev_user.users;

@@ -8,6 +8,8 @@ import (
 )
 
 type Config struct {
+	PORT string `split_words:"PORT" default:"4000"`
+
 	DB_URL         string `split_words:"DB_URL"`
 	DB_HOST        string `split_words:"DB_HOST"`
 	DB_PORT        int    `split_words:"DB_PORT"`
