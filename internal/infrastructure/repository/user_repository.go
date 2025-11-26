@@ -40,7 +40,7 @@ func (r *userRepository) CreateUser(ctx context.Context, user models.User) (*mod
 
 func (r *userRepository) GetListUsers(ctx context.Context) ([]models.User, error) {
 	var users []models.User
-	err := r.db.WithContext(ctx).Find(&users).Error
+	err := r.db.WithContext(ctx).Order("created_at DESC").Find(&users).Error
 	if err != nil {
 		return nil, err
 	}
