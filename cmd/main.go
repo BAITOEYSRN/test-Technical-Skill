@@ -9,7 +9,9 @@ import (
 	"github.com/BAITOEYSRN/test-Technical-Skill/internal/infrastructure/db"
 	"github.com/BAITOEYSRN/test-Technical-Skill/internal/interface/routes"
 	middleware "github.com/BAITOEYSRN/test-Technical-Skill/pkg/middleware"
+	"github.com/BAITOEYSRN/test-Technical-Skill/pkg/response"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func main() {
@@ -39,7 +41,7 @@ func main() {
 	app := gin.New()
 
 	app.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "OK"})
+		response.ResponseJsonWithCode(c, http.StatusOK, uuid.New(), "success", "OK", nil)
 	})
 
 	app.Use(middleware.Logging())

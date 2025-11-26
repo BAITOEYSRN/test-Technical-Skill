@@ -3,9 +3,12 @@ package pkg
 import (
 	"log"
 	"net/http"
+	"runtime/debug"
 	"time"
 
+	"github.com/BAITOEYSRN/test-Technical-Skill/pkg/response"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func Logging() gin.HandlerFunc {
@@ -42,12 +45,21 @@ func CORSMiddleware() gin.HandlerFunc {
 func Recovery() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
-			if err := recover(); err != nil {
-				log.Printf("panic: %v", err)
-				c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+			if r := recover(); r != nil {
+				log.Printf("[PANIC] %v\n%s", r, debug.Stack())
+				response.ResponseJsonWithCode(
+					c,
+					http.StatusInternalServerError,
+					uuid.New(),
+					"error",
+					"Internal Server Error",
+					nil,
+				)
+
 				c.Abort()
 			}
 		}()
+
 		c.Next()
 	}
 }
